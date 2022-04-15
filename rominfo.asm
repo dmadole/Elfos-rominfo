@@ -33,10 +33,10 @@ start:      org   2000h
 
             ; Build information
 
-            db    3+80h               ; month
-            db    9                   ; day
+            db    4+80h               ; month
+            db    15                  ; day
             dw    2022                ; year
-            dw    1                   ; build
+            dw    2                   ; build
 
             db    'See github.com/dmadole/Elfos-rominfo for more info',0
 
