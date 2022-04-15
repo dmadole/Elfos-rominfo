@@ -241,7 +241,7 @@ getdev:    sep   scall
            plo   r7
 
            sep   scall
-           dw    o_getdev
+           dw    f_getdev
 
            glo   rf
            plo   r8
