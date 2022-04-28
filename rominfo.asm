@@ -34,17 +34,49 @@ start:      org   2000h
             ; Build information
 
             db    4+80h               ; month
-            db    15                  ; day
+            db    27                  ; day
             dw    2022                ; year
-            dw    2                   ; build
+            dw    3                   ; build
 
             db    'See github.com/dmadole/Elfos-rominfo for more info',0
 
 
-main:      ldi   high 8000h
-           phi   r7
-           ldi   low 8000h
+main:      sep   scall
+           dw    f_freemem
+           inc   rf
+
+           glo   rf
            plo   r7
+           sdi   0
+           plo   rd
+
+           ghi   rf
+           phi   r7
+           sdbi  0
+           phi   rd
+           
+           sep   scall
+           dw    o_inmsg
+           db    'Size: ',0
+
+           ldi   high buffer
+           phi   rf
+           ldi   low buffer
+           plo   rf
+
+           sep   scall
+           dw    f_hexout4
+
+           ldi   0
+           str   rf
+
+           dec   rf
+           dec   rf
+           dec   rf
+           dec   rf
+
+           sep   scall
+           dw    o_msg
 
            ldi   0
            phi   rd
@@ -65,7 +97,7 @@ loop:      glo   rd
 
            sep   scall
            dw    o_inmsg
-           db    'Checksum: ',0
+           db    13,10,'Checksum: ',0
 
            ldi   high buffer
            phi   rf
